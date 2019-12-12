@@ -1,7 +1,6 @@
 #lang play
 
 (require "baseC2.rkt")
-(require "interp_recursive.rkt")
 
 (defmac (foo decision (transitions :
                                      [state :
