@@ -68,6 +68,27 @@
 [test (m3 '(1 0 1 1 0 0 1 0)) '(q0 q1 q2 q3 q2 q1 q2 q3 q0)]
 [test (m3 '(1 1 0 1 0 1 0 0 1)) #f]
 
+
+;TEST5: AUTOMATA con ciclos
+; NO INCLUIR EN LA TAREA
+(define m4 (ND-FSA
+            ( init : q0) ;estado inicial
+            ( final : q0 q3 q5) ;estados de aceptación
+            ( transitions : [q0 : (c → q1)]
+                            [q1 : (b → q2)
+                                  (c → q3)]
+                            [q2 : (a → q1 q5)]
+                            [q3 : (b → q4)]
+                            [q4 : (a → q2)
+                                  (b → q5)]
+                            [q5 : ])))
+
+[test (m4 '(c b a)) '(q0 q1 q2 q5)]
+[test (m4 '(c c)) '(q0 q1 q3)]
+[test (m4 '(c c b b)) '(q0 q1 q3 q4 q5)]
+[test (m4 '(c b a c)) '(q0 q1 q2 q1 q3)]
+
+
 #|----------- TEST P2 -----------|#
 ;TEST P2 even
 [test (run'(rec2 (even (fun (n) (if0 n 1 (odd (- n 1)))))  ;1 represents #t
